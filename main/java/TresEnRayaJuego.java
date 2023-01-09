@@ -12,7 +12,7 @@ public class TresEnRayaJuego {
             imprimirMatriz(mapa);
 
             //Repetirá hasta que verifique haya 9 valores de "X" o "O"
-            while(!verificarLimiteJuego(mapa)){
+            do{
                 // Scanner
                 Scanner sc = new Scanner(System.in);
 
@@ -61,6 +61,11 @@ public class TresEnRayaJuego {
                     break;
                 }
 
+                // Verificar si hay empate
+                if (!verificarEmpate(mapa)){
+                    System.out.println("EMPATE!");
+                    break;
+                }
                 //========================================================================================
                 // Valores de fila y columna JUGADOR 2
                 int[] posicionesJugadorDos = new int[2];
@@ -105,7 +110,8 @@ public class TresEnRayaJuego {
                 if (verificarGanadorJugadorDos(mapa)){
                     break;
                 }
-            }
+            }while(!verificarEmpate(mapa));
+
             System.out.println(" ");
             salir = salir();
         }
@@ -303,5 +309,22 @@ public class TresEnRayaJuego {
                 System.out.println("Por favor, ingrese una respuesta válida (Y/N):");
             }
         }
+    }
+
+    // Verificar que todas las casillas están ocupadas para acabar el juego
+    public static Boolean verificarEmpate(String[][] miMatriz){
+        final int contadorLimite = 9;
+        int contador = 0;
+        for (int filas = 0; filas < miMatriz.length; filas++){
+            for (int columnas = 0; columnas < miMatriz[filas].length; columnas++){
+                if (miMatriz[filas][columnas].equals("X") || miMatriz[filas][columnas].equals("O")){
+                    contador += 1;
+                }
+            }
+        }
+        if (contador == contadorLimite){
+            return true;
+        }
+        return false;
     }
 }
