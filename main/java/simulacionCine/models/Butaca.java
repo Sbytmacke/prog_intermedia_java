@@ -1,12 +1,13 @@
 package simulacionCine.models;
 
+import simulacionCine.enums.Color;
 import simulacionCine.enums.EstadoButaca;
 
 // Clase que representa una butaca de un cine.
 public class Butaca {
-    private EstadoButaca estado;
-    private String posicionFila;
-    private String posicionColumna;
+    private final EstadoButaca estado;
+    private final String posicionFila;
+    private final String posicionColumna;
     private boolean vip;
 
     public Butaca(EstadoButaca estado, String fila, String columna, boolean esVip) {
@@ -26,12 +27,21 @@ public class Butaca {
     }
 
     /**
+     * Establece si la butaca es VIP o no.
+     *
+     * @param vip Valor a establecer.
+     */
+    public void setBooleanButacaVip(Boolean vip) {
+        this.vip = vip;
+    }
+
+    /**
      * Devuelve la posición completa de la butaca en formato "fila + columna".
      *
      * @return Posición completa de la butaca.
      */
     public String getPosicionCompletaButaca() {
-        return "$posicionFila$posicionColumna";
+        return ("" + posicionFila + posicionColumna + "");
     }
 
     /**
@@ -41,15 +51,6 @@ public class Butaca {
      */
     public EstadoButaca getEstadoButaca() {
         return estado;
-    }
-
-    /**
-     * Establece si la butaca es VIP o no.
-     *
-     * @param vip Valor a establecer.
-     */
-    public void setBooleanButacaVip(Boolean vip) {
-        this.vip = vip;
     }
 
     /**
@@ -64,14 +65,14 @@ public class Butaca {
     @Override
     public String toString() {
         if (estado == EstadoButaca.LIBRE) {
-            return "$posicionFila$posicionColumna:L";
+            return "" + posicionFila + posicionColumna + ":" + Color.GREEN.get() + "L" + Color.RESET.get();
         }
         if (estado == EstadoButaca.RESERVADO) {
-            return "$posicionFila$posicionColumna:R";
+            return "" + posicionFila + posicionColumna + ":" + Color.YELLOW.get() + "R" + Color.RESET.get();
         }
         if (estado == EstadoButaca.OCUPADO) {
-            return "$posicionFila$posicionColumna:O";
+            return "" + posicionFila + posicionColumna + ":" + Color.RED.get() + "O" + Color.RESET.get();
         }
-        return "$posicionFila$posicionColumna:error";
+        return "" + posicionFila + posicionColumna + ":error";
     }
 }

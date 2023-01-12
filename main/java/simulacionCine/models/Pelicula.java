@@ -8,7 +8,10 @@ public class Pelicula {
     String genero;
 
     public Pelicula(String nombre, String anno, String director, String genero) {
-
+        this.nombre = nombre;
+        this.anno = anno;
+        this.director = director;
+        this.genero = genero;
     }
 
     /**
@@ -27,6 +30,6 @@ public class Pelicula {
      */
     @Override
     public String toString() {
-        return "PELICULA -> (nombre='$nombre', año='$anno', director='$director', género='$genero')";
+        return "PELICULA -> (nombre='" + nombre + "', año='" + anno + "', director='" + director + ", género='" + genero + "')";
     }
 }

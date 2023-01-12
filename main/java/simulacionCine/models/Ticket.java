@@ -1,25 +1,27 @@
 package simulacionCine.models;
 
 import simulacionCine.enums.EstadoTicket;
-import java.util.*;
+
+import java.util.UUID;
 
 // Clase que representa un ticket de compra o reserva para una película.
-public class Ticket{
-        private UUID id;
-        public EstadoTicket estado;
-        public String salaID;
-        String  cantidadEntradas;
-        String  pelicula;
-        public Butaca[] butacas;
+public class Ticket {
+    public EstadoTicket estado;
+    public String salaID;
+    public Butaca[] butacas;
+    String cantidadEntradas;
+    String pelicula;
+    private final UUID id = UUID.randomUUID();
 
     // Constructor para un UUID
-    public Ticket (UUID id) {
-        this.id = UUID.randomUUID();
-    }
-
     public Ticket(EstadoTicket estado, String salaID, String cantidadEntradas, String pelicula, Butaca[] butacas) {
-
+        this.estado = estado;
+        this.salaID = salaID;
+        this.cantidadEntradas = cantidadEntradas;
+        this.pelicula = pelicula;
+        this.butacas = butacas;
     }
+
 
     /**
      * Devuelve la cantidad de entradas compradas.
@@ -44,22 +46,22 @@ public class Ticket{
      *
      * @return Cadena con la información de las butacas asignadas al cliente.
      */
-    private String imprimirButacasCliente()  {
+    private String imprimirButacasCliente() {
         StringBuilder cadenaButacas = new StringBuilder();
 
-        for (int i = 0; i <= butacas.length-1; i++) {
+        for (int i = 0; i <= butacas.length - 1; i++) {
             cadenaButacas.append(butacas[i].getPosicionCompletaButaca());
-            if (butacas[i].getBooleanButacaVip()){
+            if (butacas[i].getBooleanButacaVip()) {
                 cadenaButacas.append("(VIP)");
             }
-            if (!butacas[i].getBooleanButacaVip()){
+            if (!butacas[i].getBooleanButacaVip()) {
                 cadenaButacas.append("(ESTÁNDAR)");
             }
             cadenaButacas.append(" ");
 
         }
 
-        return "Butacas -> "+cadenaButacas;
+        return "Butacas -> " + cadenaButacas;
     }
 
     /**

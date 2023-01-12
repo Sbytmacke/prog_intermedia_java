@@ -93,7 +93,7 @@ public class funcionesMenuCliente {
                 // Salir
                 case "0" -> {
                     falsoBorradoDeConsola();
-                    break;
+                    menuEleccionUsuario(cine, almacenClientes);
                 }
             }
         }
@@ -786,7 +786,7 @@ public class funcionesMenuCliente {
     public static void comprarEntrada(Sala[] cine, Cliente[] almacenClientes) {
         // Almacén donde guardaré las elecciones de mi usuario
         String[] almacenElecciones = new String[3];
-        for (int i = 0; i < almacenClientes.length; i++) {
+        for (int i = 0; i < almacenElecciones.length; i++) {
             almacenElecciones[i] = " ";
         }
 

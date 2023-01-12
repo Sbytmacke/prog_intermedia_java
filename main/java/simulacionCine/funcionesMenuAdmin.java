@@ -2,6 +2,7 @@ package simulacionCine;
 
 import simulacionCine.enums.EstadoButaca;
 import simulacionCine.models.Butaca;
+import simulacionCine.models.Cliente;
 import simulacionCine.models.Sala;
 
 import java.util.Scanner;
@@ -51,7 +52,7 @@ public class funcionesMenuAdmin {
      *
      * @param cine El cine del que se desea obtener información.
      */
-    public static void menuAdmin(Sala[] cine) {
+    public static void menuAdmin(Sala[] cine, Cliente[] almacenClientes) {
         while (true) {
             portadaCinesAngel();
             System.out.println("(ADMIN) -> Selecciona la opción deseada: ");
@@ -78,9 +79,13 @@ public class funcionesMenuAdmin {
                         // No saldremos del bucle hasta que introduzcamos "menu"
                     }
                     falsoBorradoDeConsola();
+
                 }
                 // Salir
-                case "0" -> falsoBorradoDeConsola();
+                case "0" -> {
+                    falsoBorradoDeConsola();
+                    menuEleccionUsuario(cine, almacenClientes);
+                }
             }
         }
     }

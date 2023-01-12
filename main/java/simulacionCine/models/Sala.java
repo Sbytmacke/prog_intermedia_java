@@ -1,24 +1,33 @@
 package simulacionCine.models;
 
+import simulacionCine.enums.Color;
 import simulacionCine.enums.EstadoButaca;
 
 // Clase que representa una sala de cine.
 public class Sala {
+    private final String nombre;
+    private final int tamannoFila;
+    private final int tamannoColumna;
     public String id;
     public Pelicula pelicula;
-    private String nombre;
-    private int tamannoFila;
-    private int tamannoColumna;
-
     // La mantengo fuera del init para que todas las funciones tengan acceso a la matriz
     private Butaca[][] matrizButacas;
+
+    public Sala(String id, String nombre, Pelicula pelicula, int tamannoFila, int tamannoColumna) {
+        this.id = id;
+        this.nombre = nombre;
+        this.pelicula = pelicula;
+        this.tamannoFila = tamannoFila;
+        this.tamannoColumna = tamannoColumna;
+        init();
+    }
 
     /**
      * Inicializa la matriz de butacas de la sala con butacas en estado Libre,
      * y su correspondiente posición.
      * También asigna aleatoriamente butacas VIP en la matriz.
      */
-    public Sala(int tamannoFila, int tamannoColumna) {
+    public void init() {
         Butaca butacaMain = new Butaca(EstadoButaca.LIBRE, "A", "0", false);
 
         matrizButacas = new Butaca[tamannoFila][tamannoColumna];
@@ -29,10 +38,6 @@ public class Sala {
             }
         }
         generarButacasVIP();
-    }
-
-    public Sala(String id, String nombre, Pelicula pelicula, int tamannoFila, int tamannoColumna) {
-
     }
 
     /**
@@ -59,7 +64,7 @@ public class Sala {
             asignarPosicionesButacasPorDefecto();
 
             for (int filas = 0; filas < matrizButacas.length; filas++) {
-                for (int columnas = 0; filas < matrizButacas[filas].length; filas++) {
+                for (int columnas = 0; columnas < matrizButacas[filas].length; columnas++) {
                     int sorteoVip = (int) (Math.random() * 100 + 1);
                     if (sorteoVip <= probabilidadButacaVip) {
                         matrizButacas[filas][columnas].setBooleanButacaVip(true);
@@ -277,19 +282,17 @@ public class Sala {
      * Muestra por pantalla la matriz de butacas de la sala.
      */
     public void imprimirMatrizButacas() {
-        String purple = "\u001b[35m";
-        String reset = "\u001b[0m";
         for (int filas = 0; filas < matrizButacas.length; filas++) {
             for (int columnas = 0; columnas < matrizButacas[filas].length; columnas++) {
                 if (columnas == matrizButacas[filas].length - 1) {
                     if (matrizButacas[filas][columnas].getBooleanButacaVip()) {
-                        System.out.println(purple + matrizButacas[filas][columnas] + reset);
+                        System.out.println(Color.PURPLE.get() + matrizButacas[filas][columnas] + Color.RESET.get());
                     } else {
                         System.out.println(matrizButacas[filas][columnas]);
                     }
                 } else {
                     if (matrizButacas[filas][columnas].getBooleanButacaVip()) {
-                        System.out.print(purple + matrizButacas[filas][columnas] + reset + " ");
+                        System.out.print(Color.PURPLE.get() + matrizButacas[filas][columnas] + Color.RESET.get() + " ");
                     } else {
                         System.out.print(matrizButacas[filas][columnas] + " ");
                     }
@@ -297,7 +300,7 @@ public class Sala {
             }
         }
         System.out.println("----------------------------------");
-        System.out.println("LEYENDA: L -> (libre), R -> (reservado), O -> (ocupado), " + purple + "MORADO" + reset + " -> (VIP)");
+        System.out.println("LEYENDA: " + Color.GREEN.get() + "L" + Color.RESET.get() + " -> (libre), " + Color.YELLOW.get() + "R" + Color.RESET.get() + " -> (reservado), " + Color.RED.get() + "O" + Color.RESET.get() + " -> (ocupado), " + Color.PURPLE.get() + "MORADO" + Color.RESET.get() + " -> (VIP)");
         System.out.println();
     }
 

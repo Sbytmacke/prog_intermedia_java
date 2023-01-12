@@ -3,16 +3,23 @@ package simulacionCine.models;
 import simulacionCine.enums.EstadoTicket;
 
 // Clase que representa un cliente una vez realice una reserva o compra
-public class Cliente{
-    private String nombre;
-    private  String apellido;
+public class Cliente {
+    private final String nombre;
+    private final String apellido;
+    private final String telefono;
     public String dni;
-    private String telefono;
     public String email;
-    private String tarjetaCredito;
     public Ticket informacionTicket;
+    private String tarjetaCredito;
 
     public Cliente(String nombre, String apellido, String dni, String telefono, String email, String tarjetaCredito, Ticket informacionTicket) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.email = email;
+        this.tarjetaCredito = tarjetaCredito;
+        this.informacionTicket = informacionTicket;
     }
 
     /**
@@ -47,8 +54,8 @@ public class Cliente{
      *
      * @return Cadena con información del cliente.
      */
-     @Override
-     public String toString() {
+    @Override
+    public String toString() {
         return "Cliente/Usuario -> (nombre='$nombre', apellido='$apellido', dni='$dni', telefono='$telefono', email='$email', tarjetaCredito='$tarjetaCredito',ticketID='${informacionTicket.ticketIDstring()}')";
     }
 }

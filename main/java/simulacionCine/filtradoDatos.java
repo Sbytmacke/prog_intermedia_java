@@ -2,6 +2,7 @@ package simulacionCine;
 
 import simulacionCine.enums.EstadoButaca;
 import simulacionCine.models.Sala;
+
 public class filtradoDatos {
     /**
      * Filtra una cadena de caracteres según una expresión regular para asegurar que tiene entre 3 y 20 letras.
@@ -89,18 +90,17 @@ public class filtradoDatos {
      * Una cantidad de entradas válida debe ser un número entero mayor a 0 y menor o igual al número máximo de butacas.
      *
      * @param cantidadEntradas La cantidad de entradas a verificar.
-     * @param maxButacas El número máximo de butacas disponibles.
+     * @param maxButacas       El número máximo de butacas disponibles.
      * @return "true" si la cantidad de entradas es válida, "false" si no lo es.
      */
     public static Boolean filtroCantidadEntradas(String cantidadEntradas, int maxButacas) {
         // Filtro valores alfabéticos
         String regexValorUnico = "\\d+";
-        if (!regexValorUnico.matches(cantidadEntradas)) {
+        if (!cantidadEntradas.matches(regexValorUnico)) {
             System.out.println("ERROR: Debe ser un número!");
             System.out.println();
             return false;
         }
-
         if (Integer.parseInt(cantidadEntradas) > maxButacas) {
             System.out.println("ERROR: Como mínimo es 1, y como máximo $maxButacas!");
             System.out.println();
@@ -120,8 +120,8 @@ public class filtradoDatos {
      * - No debe estar ocupada o reservada previamente.
      * - Debe estar dentro de los límites de la sala en cuestión.
      *
-     * @param cine El cine al que pertenece la sala.
-     * @param idSala El ID de la sala a verificar.
+     * @param cine          El cine al que pertenece la sala.
+     * @param idSala        El ID de la sala a verificar.
      * @param entradaButaca La butaca a verificar.
      * @return "true" si la butaca es válida, "false" si no lo es.
      */
@@ -162,7 +162,7 @@ public class filtradoDatos {
         // FILAS
         // Filtro para ser las filas siempre letras
         String regexFila = ("[a-z]|[A-Z]");
-        if (!regexFila.matches(entradaButaca.substring(0, 1))) {
+        if (!entradaButaca.substring(0, 1).matches(regexFila)) {
             System.out.println("ERROR: Debes introducir en las filas una letra: (ejemplo -> A1)");
             System.out.println();
             return false;

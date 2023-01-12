@@ -25,7 +25,6 @@ public class simulacionCine {
                 new Pelicula("Avatar 2", "2022", "James Cameron", "Science Fiction"),
                 new Pelicula("El viaje de Chihiro", "2001", "Hayao Miyazaki", "Anime-Fantasy"),
         };
-
         // Inicialización de las salas que dispongamos, con sus correspondientes butacas en estado libre por defecto
         Sala[] cine = {
                 new Sala("001", "Sala 1", catalogoPeliculas[0], BUTACAS_FILA_MAX, BUTACAS_COLUMNA_MAX),
@@ -64,7 +63,7 @@ public class simulacionCine {
                     String passCorrect = "1234";
                     if (isPassCorrect(passCorrect)) {
                         falsoBorradoDeConsola();
-                        menuAdmin(cine);
+                        menuAdmin(cine, almacenClientes);
                         break;
                     }
                 } while (repetir("¿Quieres volver a intentar introducir la contraseña? (S/N):"));
@@ -80,7 +79,6 @@ public class simulacionCine {
             }
         }
     }
-
 
     /**
      * Muestra un mensaje y espera a que el usuario ingrese "admin", "user" o "salir".
@@ -164,4 +162,5 @@ public class simulacionCine {
         String entradaDireccionMenu = sc.nextLine().toLowerCase();
         return entradaDireccionMenu.equals("menu");
     }
+
 }
